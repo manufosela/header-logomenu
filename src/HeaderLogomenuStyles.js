@@ -157,11 +157,16 @@ export const HeaderLogomenuStyles = css`
   }
 
   @media (max-width: 768px) {
+    ul > li > a, ul > li > button {
+      color: var(--header-logomenu-submenu-color);
+      background-color: var(--header-logomenu-submenu-background-color);
+    }
+
     .menu {
       display: none;
       flex-direction: column;
-      color: var(--header-logomenu-menu-color);
-      background-color: var(--header-logomenu-menu-background-color);
+      color: var(--header-logomenu-submenu-color);
+      background-color: var(--header-logomenu-submenu-background-color);
       position: absolute;
       top: 2rem;
       right: 3rem;
@@ -169,6 +174,8 @@ export const HeaderLogomenuStyles = css`
       text-align: center;
       z-index: 1;
       height: auto;
+      margin: 0;
+      padding: 0 1rem;
     }
   
     .menu.show {
@@ -176,7 +183,7 @@ export const HeaderLogomenuStyles = css`
     }
   
     .menu li {
-      margin: 10px 0;
+      margin-bottom: 1rem;
     }
   
     .hamburger-menu {
@@ -186,6 +193,10 @@ export const HeaderLogomenuStyles = css`
     header {
       justify-content: space-between;
       display:flex;
+    }
+
+    ul > li > button, ul > li > ul {
+      margin:0;
     }
   }
 `;
