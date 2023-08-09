@@ -15,7 +15,39 @@ npm i header-logomenu
   import 'header-logomenu/header-logomenu.js';
 </script>
 
-<header-logomenu></header-logomenu>
+<header-logomenu logo="/image/logo.png" logo-url="http://myurl.com">
+  <nav>
+    <ul>
+      <li id="menu1">
+        <button>MENU 1</button>
+        <ul>
+          <li id="linkA1"><a href="https://url-to-linkA1">Option 1 submenu 1</a></li>
+          <li id="linkA2"><a href="https://url-to-linkA2" target="_blank">Option 2 submenu 1</a></li>
+          <li id="linkA3"><a href="https://url-to-linkA3">Option 3 submenu 1</a></li>
+          <li id="linkA4"><a href="https://url-to-linkA4">Option 4 submenu 1</a></li>
+        </ul>
+      </li>
+      <li id="linkB"><a href="https://url-to-linkB">Option 3 menu</a></li>
+      <li id="linkC"><a href="https://url-to-linkC">Option 4 menu</a></li>
+      <li id="linkD"><a href="https://url-to-linkD">Option 5 menu</a></li>
+    </ul>
+  </nav>
+</header-logomenu>
+```
+
+```css
+  /** DEFAULT CSS VARIABLES */
+    --header-height: 4rem;
+    --header-color-primary: #F70;
+    --header-color-dark: #000;
+    --header-logomenu-text-color: #000;
+    --header-logomenu-background-color: #fff;
+    --header-logomenu-menu-background-color: #eee;
+    --header-logomenu-submenu-background-color: #ddd;
+    --header-logomenu-menu-color: #000;
+    --header-logomenu-submenu-color: #000;
+    --header-background-color-selected: #eee;
+    --header-color-bar: #000;
 ```
 
 ## Linting and formatting
