@@ -15,6 +15,9 @@ export class HeaderLogomenu extends LitElement {
     super();
     this.logo = 'about:blank';
     this.logoUrl = 'about:blank';
+    if (!this.querySelector('*')) {
+      this.appendChild(document.createElement('div'));
+    }
     this.content = this.querySelector('*');
     this.content.classList.add('navbar-container');
     this.content.setAttribute('role', 'navigation');
@@ -52,7 +55,9 @@ export class HeaderLogomenu extends LitElement {
     this.menuHamburger = [div];
 
     const firstUL = this.content.querySelector('ul');
-    firstUL.classList.add('menu');
+    if (firstUL) {
+      firstUL.classList.add('menu');
+    }
 
     this.content.querySelectorAll('button').forEach((button) => {
       // add image to the right of the button with a arrow and add aria-expanded="false"
@@ -178,15 +183,17 @@ export class HeaderLogomenu extends LitElement {
       }
     });
 
-    const button = this.shadowRoot.querySelector('button')
-    const computedStyle = getComputedStyle(button);
-    this.fillArrowColor = HeaderLogomenu.rgbToHex(computedStyle.color);
-    const arrows = this.shadowRoot.querySelectorAll('ul > li > button > img');
-    arrows.forEach((arrow) => {
-      const arrowDown = this.arrowDown.replace('@COLOR@', this.fillArrowColor);
-      // eslint-disable-next-line no-param-reassign
-      arrow.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(arrowDown)}`;
-    });
+    const button = this.shadowRoot.querySelector('button');
+    if (button) {
+      const computedStyle = getComputedStyle(button);
+      this.fillArrowColor = HeaderLogomenu.rgbToHex(computedStyle.color);
+      const arrows = this.shadowRoot.querySelectorAll('ul > li > button > img');
+      arrows.forEach((arrow) => {
+        const arrowDown = this.arrowDown.replace('@COLOR@', this.fillArrowColor);
+        // eslint-disable-next-line no-param-reassign
+        arrow.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(arrowDown)}`;
+      });
+    }
   }
 
   render() {
