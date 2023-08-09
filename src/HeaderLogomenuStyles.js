@@ -93,8 +93,8 @@ export const HeaderLogomenuStyles = css`
     border-bottom: var(--header-logomenu-element-hover-border);
     background-color: var(--header-logomenu-element-hover-background-color);
     border-radius: var(--header-logomenu-element-hover-border-radius);
-    margin:0.5rem;
-    padding: 0.5rem;
+    margin: 0.1rem 0.5rem;
+    padding: 0.1rem 0.5rem;
   }
 
   ul > li > button > img {
