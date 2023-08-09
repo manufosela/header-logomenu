@@ -2,22 +2,17 @@ import { css } from 'lit';
 
 /**
  * css variables:
- * --header-color-primary
+ * --header-logomenu-color-primary
  * --header-logomenu-text-color
  * --header-logomenu-background-color
- * --header-color-dark
- * --header-height
+ * --header-logomenu-color-dark
+ * --header-logomenu-height
  */
 export const HeaderLogomenuStyles = css`
   :host {
-    display: block;
-    margin: 0;
-    padding: 0;
-    color: var(--header-logomenu-text-color, #000);
-    visibility: hidden;
-    --header-height: 4rem;
-    --header-color-primary: #F70;
-    --header-color-dark: #000;
+    --header-logomenu-height: 4rem;
+    --header-logomenu-color-primary: #F70;
+    --header-logomenu-color-dark: #000;
     --header-logomenu-text-color: #000;
     --header-logomenu-background-color: #fff;
     --header-logomenu-border: 0;
@@ -25,8 +20,17 @@ export const HeaderLogomenuStyles = css`
     --header-logomenu-submenu-background-color: #ddd;
     --header-logomenu-menu-color: #000;
     --header-logomenu-submenu-color: #000;
-    --header-background-color-selected: #eee;
-    --header-color-bar: #000;
+    --header-logomenu-background-color-selected: #eee;
+    --header-logomenu-color-bar: #000;
+    --header-logomenu-element-hover-border: 2px solid var(--header-logomenu-color-dark);
+    --header-logomenu-element-hover-background-color: var(--header-logomenu-background-color-selected);
+    --header-logomenu-element-hover-border-radius: 0.5rem;
+  
+    display: block;
+    margin: 0;
+    padding: 0;
+    color: var(--header-logomenu-text-color);
+    visibility: hidden;
   }
 
   header {
@@ -34,7 +38,7 @@ export const HeaderLogomenuStyles = css`
     padding:0;
     display: flex;
     width: 100vw;
-    height: var(--header-height);
+    height: var(--header-logomenu-height);
     background-color: var(--header-logomenu-background-color);
     border: var(--header-logomenu-border);
   }
@@ -76,52 +80,33 @@ export const HeaderLogomenuStyles = css`
     margin: 0 0.5rem;
   }
 
-  ul li a, ul > li > button {
-    margin: 0 0.5rem;
-    color: var(--header-color-primary, );
+  ul > li > a, ul > li > button {
+    margin: 0.5rem;
+    color: var(--header-logomenu-color-primary);
     text-decoration: none;
     outline: none;
-    padding: 0.5rem 0.5rem 0 0.5rem;
+    padding: 0.5rem;
   }
 
-  ul li a:hover, ul > li > button:hover, ul li a:focus, ul > li > button:focus {
+  ul > li > a:hover, ul > li > button:hover, ul li a:focus, ul > li > button:focus {
     border:0;
-    border-bottom: 2px solid var(--header-color-dark);
-    margin:0 0.5rem;
-    padding: 0.5rem 0.5rem 0 0.5rem;
-  }
-
-  ul li a:focus, ul > li > button:focus {
-    border-bottom: 2px solid var(--header-color-dark);
-  }
-
-  ul li a.selected, ul > li > button.selected {
-    background: var(--header-background-color-selected);
-  }
-  ul li a:active {
-    border-bottom: 2px solid var(--header-color-primary);
-  }
-
-  ul li span:hover {
-    border-bottom: 2px solid var(--header-color-dark);
-  }
-
-  ul li span:focus-visible {
-    border-bottom: 2px solid var(--header-color-dark);
-  }
-
-  ul li span:active {
-    border-bottom: 2px solid var(--hedaer-color-primary);
+    border-bottom: var(--header-logomenu-element-hover-border);
+    background-color: var(--header-logomenu-element-hover-background-color);
+    border-radius: var(--header-logomenu-element-hover-border-radius);
+    margin:0.5rem;
+    padding: 0.5rem;
   }
 
   ul > li > button > img {
     margin-left: 0.3rem;
   }
 
-
+  ul ul > li > a {
+    color: var(--header-logomenu-submenu-color);
+  }
 
   .headerLogo {
-    height: var(--header-height);
+    height: var(--header-logomenu-height);
     padding-left: 1rem;
   }
 
@@ -137,7 +122,7 @@ export const HeaderLogomenuStyles = css`
   .navbar__ul--expanded {
     display: block;
     position: absolute;
-    color: var(--header-logomenu-menu-color);
+    color: var(--header-logomenu-submenu-color);
     background: var(--header-logomenu-submenu-background-color);
     border: 1px outset #ccc;
     border-bottom-left-radius: 0.5rem;
@@ -169,7 +154,7 @@ export const HeaderLogomenuStyles = css`
   .bar {
     width: 100%;
     height: 3px;
-    background-color: var(--header-color-bar);
+    background-color: var(--header-logomenu-color-bar);
   }
 
   @media (max-width: 768px) {

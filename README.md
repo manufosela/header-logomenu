@@ -37,9 +37,9 @@ npm i header-logomenu
 
 ```css
   /** DEFAULT CSS VARIABLES */
-    --header-height: 4rem;
-    --header-color-primary: #F70;
-    --header-color-dark: #000;
+    --header-logomenu-height: 4rem;
+    --header-logomenu-color-primary: #F70;
+    --header-logomenu-color-dark: #000;
     --header-logomenu-text-color: #000;
     --header-logomenu-background-color: #fff;
     --header-logomenu-border: 0;
@@ -47,8 +47,11 @@ npm i header-logomenu
     --header-logomenu-submenu-background-color: #ddd;
     --header-logomenu-menu-color: #000;
     --header-logomenu-submenu-color: #000;
-    --header-background-color-selected: #eee;
-    --header-color-bar: #000;
+    --header-logomenu-background-color-selected: #eee;
+    --header-logomenu-color-bar: #000;
+    --header-logomenu-element-hover-border: 2px solid var(--header-logomenu-color-dark);
+    --header-logomenu-element-hover-background-color: var(--header-logomenu-background-color-selected);
+    --header-logomenu-element-hover-border-radius: 0.5rem;
 ```
 
 ## Linting and formatting
