@@ -42,6 +42,7 @@ npm i header-logomenu
     --header-color-dark: #000;
     --header-logomenu-text-color: #000;
     --header-logomenu-background-color: #fff;
+    --header-logomenu-border: 0;
     --header-logomenu-menu-background-color: #eee;
     --header-logomenu-submenu-background-color: #ddd;
     --header-logomenu-menu-color: #000;
