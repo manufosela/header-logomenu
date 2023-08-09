@@ -3,10 +3,10 @@
   "description": "Webcomponent header with logo and menu, accesible and responsive, following open-wc recommendations",
   "license": "Apache-2.0",
   "author": "manufosela",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
-  "main": "index.js",
-  "module": "index.js",
+  "main": "header-logomenu.js",
+  "module": "header-logomenu.js",
   "exports": {
     ".": "./index.js",
     "./header-logomenu.js": "./header-logomenu.js"
