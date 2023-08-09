@@ -1,3 +1,4 @@
+/* eslint-disable lit-a11y/tabindex-no-positive */
 import { html, LitElement } from 'lit';
 import { HeaderLogomenuStyles } from './HeaderLogomenuStyles.js';
 
@@ -55,7 +56,7 @@ export class HeaderLogomenu extends LitElement {
     this.content.querySelectorAll('button').forEach((button) => {
       // add image to the right of the button with a arrow and add aria-expanded="false"
       const arrow = document.createElement('img');
-      arrow.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(this.arrowDown);
+      arrow.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(this.arrowDown)}`;
       arrow.width = 14;
       arrow.alt = '';
       arrow.classList.add('navbar__arrow');
@@ -91,6 +92,14 @@ export class HeaderLogomenu extends LitElement {
         });
       }
     });
+
+    this.content.querySelectorAll('ul li').forEach((item) => {
+      if (item.querySelector('button')) {
+        item.querySelector('button').setAttribute('tabIndex', '0');
+      } else if (item.querySelector('a')) {
+        item.querySelector('a').setAttribute('tabIndex', '0');
+      }
+    });
   }
 
   _expandMenu(parentUL) {
@@ -101,7 +110,6 @@ export class HeaderLogomenu extends LitElement {
     ul.classList.add('navbar__ul--expanded');
     button.setAttribute('aria-expanded', 'true');
     button.classList.add('selected');
-
   }
 
   _contractMenu(parentUL) {
@@ -148,6 +156,12 @@ export class HeaderLogomenu extends LitElement {
     hamburgerMenu.addEventListener('keypress', (e) => {
       if (e.keyCode === 13) {
         menu.classList.toggle('show');
+        this.shadowRoot.querySelector('.menu LI').focus();
+      }
+    });
+    this.shadowRoot.querySelector('header').addEventListener('keypress', (e) => {
+      if (e.keyCode === 27) {
+        menu.classList.remove('show');
       }
     });
   }
@@ -155,7 +169,7 @@ export class HeaderLogomenu extends LitElement {
   render() {
     return html`
       <header>
-        <a href="${this.logoUrl}" tabindex="1"  >
+        <a href="${this.logoUrl}" tabindex="1">
           <img class="headerLogo" src="${this.logo}" alt="header logo" />
         </a>
         ${this.content}

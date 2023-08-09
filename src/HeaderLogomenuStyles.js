@@ -20,6 +20,10 @@ export const HeaderLogomenuStyles = css`
     --header-color-dark: #000;
     --header-logomenu-text-color: #000;
     --header-logomenu-background-color: #fff;
+    --header-logomenu-menu-background-color: #eee;
+    --header-logomenu-submenu-background-color: #ddd;
+    --header-logomenu-menu-color: #000;
+    --header-logomenu-submenu-color: #000;
     --header-background-color-selected: #eee;
     --header-color-bar: #000;
   }
@@ -79,7 +83,7 @@ export const HeaderLogomenuStyles = css`
     padding: 0.5rem 0.5rem 0 0.5rem;
   }
 
-  ul li a:hover, ul > li > button:hover {
+  ul li a:hover, ul > li > button:hover, ul li a:focus, ul > li > button:focus {
     border:0;
     border-bottom: 2px solid var(--header-color-dark);
     margin:0 0.5rem;
@@ -125,31 +129,11 @@ export const HeaderLogomenuStyles = css`
     color: white;
   }
 
-  .navbar__input {
-    display: none;
-  }
-
-  .navbar__input:checked ~ .navbar-menu-icon {
-    -webkit-transform: rotate(90deg);
-    -moz-transform: rotate(90deg);
-    -ms-transform: rotate(90deg);
-    -o-transform: rotate(90deg);
-    transform: rotate(90deg);
-    background-image: url(/assets/images/menu-nav-close.svg);
-  }
-
-  .navbar__input:checked ~ .navbar {
-    right: 0;
-  }
-
-  .navbar__arrow {
-    margin: 0 0.3rem;
-  }
-
   .navbar__ul--expanded {
     display: block;
     position: absolute;
-    background: var(--header-logomenu-background-color);
+    color: var(--header-logomenu-menu-color);
+    background: var(--header-logomenu-submenu-background-color);
     border: 1px outset #ccc;
     border-bottom-left-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
@@ -166,7 +150,7 @@ export const HeaderLogomenuStyles = css`
   .hamburger-menu {
     display: none;
     cursor: pointer;
-    margin: 1rem;
+    padding: 1rem 1rem 0 1rem;
   }
 
   .hamburger-icon {
@@ -187,7 +171,8 @@ export const HeaderLogomenuStyles = css`
     .menu {
       display: none;
       flex-direction: column;
-      background-color: #ccc;
+      color: var(--header-logomenu-menu-color);
+      background-color: var(--header-logomenu-menu-background-color);
       position: absolute;
       top: 2rem;
       right: 3rem;
@@ -214,6 +199,4 @@ export const HeaderLogomenuStyles = css`
       display:flex;
     }
   }
-
-
 `;
