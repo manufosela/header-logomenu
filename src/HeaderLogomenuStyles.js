@@ -114,6 +114,10 @@ export const HeaderLogomenuStyles = css`
     border-bottom: 2px solid var(--hedaer-color-primary);
   }
 
+  ul > li > button > img {
+    margin-left: 0.3rem;
+  }
+
 
 
   .headerLogo {
