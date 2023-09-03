@@ -8,6 +8,7 @@ export class HeaderLogomenu extends LitElement {
   static properties = {
     logo: { type: String },
     logoUrl: { type: String, attribute: 'logo-url' },
+    menuTitle: { type: String, attribute: 'menu-title' },
     fillArrowColor: { type: String },
   };
 
@@ -15,6 +16,7 @@ export class HeaderLogomenu extends LitElement {
     super();
     this.logo = 'about:blank';
     this.logoUrl = 'about:blank';
+    this.menuTitle = 'TITLE';
     if (!this.querySelector('*')) {
       this.appendChild(document.createElement('div'));
     }
@@ -126,7 +128,7 @@ export class HeaderLogomenu extends LitElement {
     arrow.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(arrowDown)}`;
     ul.classList.remove('navbar__ul--expanded');
     button.classList.remove('selected');
-    button.setAttribute('aria-expanded', false);    
+    button.setAttribute('aria-expanded', false);
   }
 
   _closeAllSubMenus() {
@@ -141,7 +143,7 @@ export class HeaderLogomenu extends LitElement {
   }
 
   _showMenu(e) {
-    const parentUL = (e.target.tagName==='BUTTON') ? e.target.parentElement : e.target.parentElement.parentElement;
+    const parentUL = (e.target.tagName === 'BUTTON') ? e.target.parentElement : e.target.parentElement.parentElement;
     const button = parentUL.querySelector('button');
     const ariaExpanded = button.getAttribute('aria-expanded');
     if (ariaExpanded === 'false') {
@@ -202,6 +204,7 @@ export class HeaderLogomenu extends LitElement {
         <a href="${this.logoUrl}" tabindex="1">
           <img class="headerLogo" src="${this.logo}" alt="header logo" />
         </a>
+        <h1 class="menuTitle">${this.menuTitle}</h1>
         ${this.content}
         ${this.menuHamburger.map((item) => html`${item}`)}
       </header>

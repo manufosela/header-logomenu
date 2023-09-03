@@ -12,6 +12,7 @@ export const HeaderLogomenuStyles = css`
   :host {
     --header-logomenu-height: 4rem;
     --header-logomenu-color-primary: #F70;
+    --header-logomenu-color-secondary: rgba(255, 77, 0, 0.5);
     --header-logomenu-color-dark: #000;
     --header-logomenu-text-color: #000;
     --header-logomenu-background-color: #fff;
@@ -37,6 +38,7 @@ export const HeaderLogomenuStyles = css`
     margin:0;
     padding:0;
     display: flex;
+    justify-content: space-between;
     width: 100vw;
     height: var(--header-logomenu-height);
     background-color: var(--header-logomenu-background-color);
@@ -107,6 +109,16 @@ export const HeaderLogomenuStyles = css`
   .headerLogo {
     height: var(--header-logomenu-height);
     padding-left: 1rem;
+  }
+  
+  .menuTitle {
+    color: var(--header-logomenu-color-secondary);
+    font-size: 1.5rem;
+    margin:0;
+    padding: 0 1rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
   }
 
   .navbar-container {

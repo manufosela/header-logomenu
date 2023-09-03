@@ -8,9 +8,6 @@
       margin:0;
       background: #fafafa;
     }
-    button {
-      background-color: green;
-    }
     header-logomenu:not(:defined) { 
       opacity: 0;
       transition: opacity 0.3s
@@ -19,6 +16,7 @@
     header-logomenu {
       --header-logomenu-height: 6rem;
       --header-logomenu-color-primary: #fff;
+      --header-logomenu-color-secondary: rgba(255,255,255,0.8);
       --header-logomenu-color-dark: #000;
       --header-logomenu-text-color: #000;
       --header-logomenu-background-color: #930;
@@ -36,7 +34,7 @@
 </head>
 <body>
   <div id="demo">
-    <header-logomenu logo="konsulthor_logo.png" logo-url="about:blank">
+    <header-logomenu logo="konsulthor_logo.png" logo-url="about:blank" menu-title="Header-LogoMenu WC">
       <nav>
         <ul>
           <li id="menu1">
