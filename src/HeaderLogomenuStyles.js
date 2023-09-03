@@ -26,6 +26,7 @@ export const HeaderLogomenuStyles = css`
     --header-logomenu-element-hover-border: 2px solid var(--header-logomenu-color-dark);
     --header-logomenu-element-hover-background-color: var(--header-logomenu-background-color-selected);
     --header-logomenu-element-hover-border-radius: 0.5rem;
+    --header-logomenu-justify-content: space-evenly;
   
     display: block;
     margin: 0;
@@ -38,7 +39,7 @@ export const HeaderLogomenuStyles = css`
     margin:0;
     padding:0;
     display: flex;
-    justify-content: space-between;
+    justify-content: var(--header-logomenu-justify-content);
     width: 100vw;
     height: var(--header-logomenu-height);
     background-color: var(--header-logomenu-background-color);
