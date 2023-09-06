@@ -181,14 +181,14 @@ export const HeaderLogomenuStyles = css`
       color: var(--header-logomenu-submenu-color);
       background-color: var(--header-logomenu-submenu-background-color);
       position: absolute;
-      top: 2rem;
-      right: 3rem;
+      top: 1rem;
+      right: 2.5rem;
       width: auto;
       text-align: center;
       z-index: 1;
       height: auto;
-      margin: 0;
-      padding: 0 1rem;
+      margin: 0px;
+      padding: 1rem;
     }
   
     .menu.show {
@@ -206,6 +206,7 @@ export const HeaderLogomenuStyles = css`
     header {
       justify-content: space-between;
       display:flex;
+      width: 103vw;
     }
 
     ul > li > button, ul > li > ul {
