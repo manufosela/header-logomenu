@@ -40,7 +40,7 @@ export const HeaderLogomenuStyles = css`
     padding:0;
     display: flex;
     justify-content: var(--header-logomenu-justify-content);
-    width: 100vw;
+    max-width: 100vw;
     height: var(--header-logomenu-height);
     background-color: var(--header-logomenu-background-color);
     border: var(--header-logomenu-border);
