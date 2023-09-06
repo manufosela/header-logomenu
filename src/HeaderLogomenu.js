@@ -201,10 +201,12 @@ export class HeaderLogomenu extends LitElement {
   render() {
     return html`
       <header>
-        <a href="${this.logoUrl}" tabindex="1">
+        <a href="${this.logoUrl}" tabindex="0">
           <img class="headerLogo" src="${this.logo}" alt="header logo" />
         </a>
-        <h1 class="menuTitle">${this.menuTitle}</h1>
+        <h1 class="menuTitle">
+          <a href="${this.logoUrl}" tabindex="0">${this.menuTitle}</a>
+        </h1>
         ${this.content}
         ${this.menuHamburger.map((item) => html`${item}`)}
       </header>
