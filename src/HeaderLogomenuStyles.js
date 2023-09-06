@@ -122,6 +122,11 @@ export const HeaderLogomenuStyles = css`
     align-items: center;
   }
 
+  .menuTitle a {
+    text-decoration: none;
+    color: var(--header-logomenu-color-secondary);
+  }
+
   .navbar-container {
     display: flex;
     justify-content: space-between;
