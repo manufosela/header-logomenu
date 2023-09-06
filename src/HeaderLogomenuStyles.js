@@ -75,6 +75,12 @@ export const HeaderLogomenuStyles = css`
     font-size: 1rem;
   }
 
+  ul > li {
+    display: flex;
+    justify-content: flex-start;
+    line-height: 1.5rem;
+  }
+
   ul > li > button + ul {
     display: none;
   }
@@ -201,7 +207,7 @@ export const HeaderLogomenuStyles = css`
     }
   
     .menu li {
-      margin-bottom: 1rem;
+      margin-bottom: 0;
     }
   
     .hamburger-menu {
