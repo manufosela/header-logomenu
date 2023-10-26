@@ -36,22 +36,25 @@ npm i header-logomenu
 ```
 
 ```css
-  /** DEFAULT CSS VARIABLES */
-    --header-logomenu-height: 4rem;
-    --header-logomenu-color-primary: #F70;
-    --header-logomenu-color-dark: #000;
-    --header-logomenu-text-color: #000;
-    --header-logomenu-background-color: #fff;
-    --header-logomenu-border: 0;
-    --header-logomenu-menu-background-color: #eee;
-    --header-logomenu-submenu-background-color: #ddd;
-    --header-logomenu-menu-color: #000;
-    --header-logomenu-submenu-color: #000;
-    --header-logomenu-background-color-selected: #eee;
-    --header-logomenu-color-bar: #000;
-    --header-logomenu-element-hover-border: 2px solid var(--header-logomenu-color-dark);
-    --header-logomenu-element-hover-background-color: var(--header-logomenu-background-color-selected);
-    --header-logomenu-element-hover-border-radius: 0.5rem;
+  /** CSS VARIABLES */
+    --header-logomenu-height
+    --header-logomenu-color-primary
+    --header-logomenu-color-secondary
+    --header-logomenu-color-dark
+    --header-logomenu-text-color
+    --header-logomenu-logo-height
+    --header-logomenu-background-color
+    --header-logomenu-border
+    --header-logomenu-menu-background-color
+    --header-logomenu-submenu-background-color
+    --header-logomenu-menu-color
+    --header-logomenu-submenu-color
+    --header-logomenu-background-color-selected
+    --header-logomenu-color-bar
+    --header-logomenu-element-hover-border
+    --header-logomenu-element-hover-background-color
+    --header-logomenu-element-hover-border-radius
+    --header-logomenu-justify-content
 ```
 
 ## Linting and formatting

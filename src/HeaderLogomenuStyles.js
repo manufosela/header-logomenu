@@ -10,28 +10,29 @@ import { css } from 'lit';
  */
 export const HeaderLogomenuStyles = css`
   :host {
-    --header-logomenu-height: 4rem;
-    --header-logomenu-color-primary: #F70;
-    --header-logomenu-color-secondary: rgba(255, 77, 0, 0.5);
-    --header-logomenu-color-dark: #000;
-    --header-logomenu-text-color: #000;
-    --header-logomenu-background-color: #fff;
-    --header-logomenu-border: 0;
-    --header-logomenu-menu-background-color: #eee;
-    --header-logomenu-submenu-background-color: #ddd;
-    --header-logomenu-menu-color: #000;
-    --header-logomenu-submenu-color: #000;
-    --header-logomenu-background-color-selected: #eee;
-    --header-logomenu-color-bar: #000;
-    --header-logomenu-element-hover-border: 2px solid var(--header-logomenu-color-dark);
-    --header-logomenu-element-hover-background-color: var(--header-logomenu-background-color-selected);
-    --header-logomenu-element-hover-border-radius: 0.5rem;
-    --header-logomenu-justify-content: space-evenly;
+    --_header-logomenu-height: var(--header-logomenu-height, 4rem);
+    --_header-logomenu-color-primary: var(--header-logomenu-color-primary, #F70);
+    --_header-logomenu-color-secondary: var(--header-logomenu-color-secondary, rgba(255, 77, 0, 0.5));
+    --_header-logomenu-color-dark: var(--header-logomenu-color-dark, #000);
+    --_header-logomenu-text-color: var(--header-logomenu-text-color, #000);
+    --_header-logomenu-logo-height: var(--header-logomenu-logo-height, 3rem);
+    --_header-logomenu-background-color: var(--header-logomenu-background-color, #fff);
+    --_header-logomenu-border: var(--header-logomenu-border, 0);
+    --_header-logomenu-menu-background-color: var(--header-logomenu-menu-background-color, #eee);
+    --_header-logomenu-submenu-background-color: var(--header-logomenu-submenu-background-color, #ddd);
+    --_header-logomenu-menu-color: var(--header-logomenu-menu-color, #000);
+    --_header-logomenu-submenu-color: var(--header-logomenu-submenu-color, #000);
+    --_header-logomenu-background-color-selected: var(--header-logomenu-background-color-selected, #eee);
+    --_header-logomenu-color-bar: var(--header-logomenu-color-bar, #000);
+    --_header-logomenu-element-hover-border: var(--header-logomenu-element-hover-border, 2px solid var(--_header-logomenu-color-dark));
+    --_header-logomenu-element-hover-background-color: var(--header-logomenu-element-hover-background-color, var(--_header-logomenu-background-color-selected));
+    --_header-logomenu-element-hover-border-radius: var(--header-logomenu-element-hover-border-radius, 0.5rem);
+    --_header-logomenu-justify-content: var(--header-logomenu-justify-content, space-evenly);
   
     display: block;
     margin: 0;
     padding: 0;
-    color: var(--header-logomenu-text-color);
+    color: var(--_header-logomenu-text-color);
     visibility: hidden;
   }
 
@@ -39,11 +40,11 @@ export const HeaderLogomenuStyles = css`
     margin:0;
     padding:0;
     display: flex;
-    justify-content: var(--header-logomenu-justify-content);
+    justify-content: var(--_header-logomenu-justify-content);
     max-width: 100vw;
-    height: var(--header-logomenu-height);
-    background-color: var(--header-logomenu-background-color);
-    border: var(--header-logomenu-border);
+    height: var(--_header-logomenu-height);
+    background-color: var(--_header-logomenu-background-color);
+    border: var(--_header-logomenu-border);
   }
 
   button {
@@ -91,7 +92,7 @@ export const HeaderLogomenuStyles = css`
 
   ul > li > a, ul > li > button {
     margin: 0.5rem;
-    color: var(--header-logomenu-color-primary);
+    color: var(--_header-logomenu-color-primary);
     text-decoration: none;
     outline: none;
     padding: 0.5rem;
@@ -99,9 +100,9 @@ export const HeaderLogomenuStyles = css`
 
   ul > li > a:hover, ul > li > button:hover, ul li a:focus, ul > li > button:focus {
     border:0;
-    border-bottom: var(--header-logomenu-element-hover-border);
-    background-color: var(--header-logomenu-element-hover-background-color);
-    border-radius: var(--header-logomenu-element-hover-border-radius);
+    border-bottom: var(--_header-logomenu-element-hover-border);
+    background-color: var(--_header-logomenu-element-hover-background-color);
+    border-radius: var(--_header-logomenu-element-hover-border-radius);
   }
 
   ul > li > button > img {
@@ -109,17 +110,17 @@ export const HeaderLogomenuStyles = css`
   }
 
   ul ul > li > a {
-    color: var(--header-logomenu-submenu-color);
+    color: var(--_header-logomenu-submenu-color);
     padding: 0.1rem 0;
   }
 
   .headerLogo {
-    height: var(--header-logomenu-height);
+    height: var(--_header-logomenu-logo-height);
     padding-left: 1rem;
   }
   
   .menuTitle {
-    color: var(--header-logomenu-color-secondary);
+    color: var(--_header-logomenu-color-secondary);
     font-size: 1.5rem;
     margin:0;
     padding: 0 1rem;
@@ -130,7 +131,7 @@ export const HeaderLogomenuStyles = css`
 
   .menuTitle a {
     text-decoration: none;
-    color: var(--header-logomenu-color-secondary);
+    color: var(--_header-logomenu-color-secondary);
   }
 
   .navbar-container {
@@ -138,15 +139,15 @@ export const HeaderLogomenuStyles = css`
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: var(--header-logomenu-background-color);
+    background-color: var(--_header-logomenu-background-color);
     color: white;
   }
 
   .navbar__ul--expanded {
     display: block;
     position: absolute;
-    color: var(--header-logomenu-submenu-color);
-    background: var(--header-logomenu-submenu-background-color);
+    color: var(--_header-logomenu-submenu-color);
+    background: var(--_header-logomenu-submenu-background-color);
     border: 1px outset #ccc;
     border-bottom-left-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
@@ -177,20 +178,20 @@ export const HeaderLogomenuStyles = css`
   .bar {
     width: 100%;
     height: 3px;
-    background-color: var(--header-logomenu-color-bar);
+    background-color: var(--_header-logomenu-color-bar);
   }
 
   @media (max-width: 768px) {
     ul > li > a, ul > li > button {
-      color: var(--header-logomenu-submenu-color);
-      background-color: var(--header-logomenu-submenu-background-color);
+      color: var(--_header-logomenu-submenu-color);
+      background-color: var(--_header-logomenu-submenu-background-color);
     }
 
     .menu {
       display: none;
       flex-direction: column;
-      color: var(--header-logomenu-submenu-color);
-      background-color: var(--header-logomenu-submenu-background-color);
+      color: var(--_header-logomenu-submenu-color);
+      background-color: var(--_header-logomenu-submenu-background-color);
       position: absolute;
       top: 1rem;
       right: 2.5rem;
