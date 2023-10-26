@@ -14,16 +14,25 @@ export class HeaderLogomenu extends LitElement {
 
   constructor() {
     super();
-    this.logo = 'about:blank';
+    this.logo = '';
     this.logoUrl = 'about:blank';
     this.menuTitle = 'TITLE';
     if (!this.querySelector('*')) {
       this.appendChild(document.createElement('div'));
     }
-    this.content = this.querySelector('*');
-    this.content.classList.add('navbar-container');
-    this.content.setAttribute('role', 'navigation');
-    this.content.setAttribute('aria-label', 'menu de navegación');
+    this.lightDOM = this.querySelectorAll('*');
+    this.content = document.createElement('div');
+
+    this.lightDOM.forEach((item) => {
+      if (item.tagName === 'nav') {
+        console.log('nav');
+        this.content.appendChild(item);
+        this.content.classList.add('navbar-container');
+        this.content.setAttribute('role', 'navigation');
+        this.content.setAttribute('aria-label', 'menu de navegación');
+      }
+    });
+
     this.fillArrowColor = '#000000';
     this.arrowDown = `<svg fill="@COLOR@" height="800px" width="800px" version="1.1" id="buttonArrow" 
       xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 330 330" xml:space="preserve">
@@ -165,6 +174,39 @@ export class HeaderLogomenu extends LitElement {
     return hex;
   }
 
+  logoHTML() {
+    if (this.logo !== '') {
+      let a = '';
+      if (this.logoUrl !== 'about:blank') {
+        a = document.createElement('a');
+        a.href = this.logoUrl;
+        a.tabIndex = 0;
+      }
+      const img = document.createElement('img');
+      img.src = this.logo;
+      img.alt = 'header logo';
+      img.classList.add('headerLogo');
+      if (a) {
+        a.appendChild(img);
+        return html`${a}`;
+      }
+      return html`${img}`;
+    }
+    return html``;
+  }
+
+  titleHTML() {
+    if (this.menuTitle !== '' && this.menuTitle !== 'TITLE') {
+      return html`
+        <h1 class="menuTitle">
+          <a href="${this.logoUrl}" tabindex="0">${this.menuTitle}</a>
+        </h1>
+      `;
+    }
+    return html``;
+  }
+
+
   firstUpdated() {
     this.style.visibility = 'visible';
     const hamburgerMenu = this.shadowRoot.querySelector('.hamburger-menu');
@@ -201,12 +243,8 @@ export class HeaderLogomenu extends LitElement {
   render() {
     return html`
       <header>
-        <a href="${this.logoUrl}" tabindex="0">
-          <img class="headerLogo" src="${this.logo}" alt="header logo" />
-        </a>
-        <h1 class="menuTitle">
-          <a href="${this.logoUrl}" tabindex="0">${this.menuTitle}</a>
-        </h1>
+        ${this.logoHTML()}
+        ${this.titleHTML()}
         ${this.content}
         ${this.menuHamburger.map((item) => html`${item}`)}
       </header>
