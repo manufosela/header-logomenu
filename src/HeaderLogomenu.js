@@ -24,8 +24,8 @@ export class HeaderLogomenu extends LitElement {
     this.content = document.createElement('div');
 
     this.lightDOM.forEach((item) => {
-      if (item.tagName === 'nav') {
-        console.log('nav');
+      if (item.tagName === 'NAV') {
+        console.log('lightdom with nav');
         this.content.appendChild(item);
         this.content.classList.add('navbar-container');
         this.content.setAttribute('role', 'navigation');
