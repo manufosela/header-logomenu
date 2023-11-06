@@ -110,7 +110,7 @@ export class HeaderLogomenu extends LitElement {
   }
 
   _manageEvents() {
-    this.shadowRoot.querySelector('ul.menu').addEventListener('click', (e) => {
+    this.shadowRoot.querySelector('.navbar-container').addEventListener('click', (e) => {
       const { target } = e;
       // console.log(target, target.parentElement);
       if (target.tagName === 'BUTTON' || (target.tagName === 'IMG' && target.classList.contains('navbar__arrow'))) {
