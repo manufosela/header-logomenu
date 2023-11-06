@@ -26,7 +26,8 @@ export class HeaderLogomenu extends LitElement {
     this.lightDOM.forEach((item) => {
       if (item.tagName === 'NAV') {
         console.log('lightdom with nav');
-        this.content.appendChild(item);
+        const newNav = item.cloneNode(true);
+        this.content.appendChild(newNav);
         this.content.classList.add('navbar-container');
         this.content.setAttribute('role', 'navigation');
         this.content.setAttribute('aria-label', 'menu de navegación');
@@ -83,37 +84,36 @@ export class HeaderLogomenu extends LitElement {
       button.setAttribute('aria-controls', `${button.parentElement.id}-submenu`);
       button.parentElement.querySelector('ul').setAttribute('id', `${button.parentElement.id}-submenu`);
     });
+  }
 
-    this.content.querySelectorAll('ul > li > button').forEach((item) => {
-      item.addEventListener('click', (e) => this._showMenu(e, item));
-    });
-
-    this.content.querySelectorAll('a').forEach((item) => {
-      item.addEventListener('click', (e) => {
+  _manageEvents() {
+    this.shadowRoot.querySelector('ul.menu').addEventListener('click', (e) => {
+      const { target } = e;
+      console.log(target, target.parentElement);
+      if (target.tagName === 'BUTTON' || (target.tagName === 'IMG' && target.classList.contains('navbar__arrow'))) {
+        this._showMenu(e, target);
+      }
+      if (target.tagName === 'A') {
+        this.shadowRoot.querySelector('.menu').classList.remove('show');
         this._closeAllSubMenus(e);
-      });
-    });
-
-    this.content.querySelectorAll('ul').forEach((item) => {
-      if (item.querySelectorAll('ul').length === 0) {
-        item.addEventListener('mouseleave', (e) => {
-          setTimeout(() => {
-            this._closeAllSubMenus(e);
-          }, 500);
-        });
-        item.addEventListener('focusout', (e) => {
-          setTimeout(() => {
-            this._closeAllSubMenus(e);
-          }, 1500);
-        });
       }
     });
 
-    this.content.querySelectorAll('ul li').forEach((item) => {
-      if (item.querySelector('button')) {
-        item.querySelector('button').setAttribute('tabIndex', '0');
-      } else if (item.querySelector('a')) {
-        item.querySelector('a').setAttribute('tabIndex', '0');
+    const hamburgerMenu = this.shadowRoot.querySelector('.hamburger-menu');
+    const menu = this.shadowRoot.querySelector('.menu');
+
+    hamburgerMenu.addEventListener('click', () => {
+      menu.classList.toggle('show');
+    });
+    hamburgerMenu.addEventListener('keypress', (e) => {
+      if (e.keyCode === 13) {
+        menu.classList.toggle('show');
+        this.shadowRoot.querySelector('.menu LI').focus();
+      }
+    });
+    this.shadowRoot.querySelector('header').addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        menu.classList.remove('show');
       }
     });
   }
@@ -140,7 +140,8 @@ export class HeaderLogomenu extends LitElement {
     button.setAttribute('aria-expanded', false);
   }
 
-  _closeAllSubMenus() {
+  _closeAllSubMenus(ev) {
+    // console.log(ev);
     const ulsWithLiAndButton = this.shadowRoot.querySelectorAll('ul li button');
     ulsWithLiAndButton.forEach(button => {
       const parentUL = button.parentElement;
@@ -209,23 +210,8 @@ export class HeaderLogomenu extends LitElement {
 
   firstUpdated() {
     this.style.visibility = 'visible';
-    const hamburgerMenu = this.shadowRoot.querySelector('.hamburger-menu');
-    const menu = this.shadowRoot.querySelector('.menu');
 
-    hamburgerMenu.addEventListener('click', () => {
-      menu.classList.toggle('show');
-    });
-    hamburgerMenu.addEventListener('keypress', (e) => {
-      if (e.keyCode === 13) {
-        menu.classList.toggle('show');
-        this.shadowRoot.querySelector('.menu LI').focus();
-      }
-    });
-    this.shadowRoot.querySelector('header').addEventListener('keypress', (e) => {
-      if (e.keyCode === 27) {
-        menu.classList.remove('show');
-      }
-    });
+    this._manageEvents();
 
     const button = this.shadowRoot.querySelector('button');
     if (button) {

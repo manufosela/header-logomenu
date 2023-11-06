@@ -10,6 +10,7 @@ import { css } from 'lit';
  */
 export const HeaderLogomenuStyles = css`
   :host {
+    z-index: 100;
     --_header-logomenu-height: var(--header-logomenu-height, 4rem);
     --_header-logomenu-color-primary: var(--header-logomenu-color-primary, #F70);
     --_header-logomenu-color-secondary: var(--header-logomenu-color-secondary, rgba(255, 77, 0, 0.5));
@@ -165,6 +166,7 @@ export const HeaderLogomenuStyles = css`
     display: none;
     cursor: pointer;
     padding: 1rem 1rem 0 1rem;
+    background-color: var(--_header-logomenu-background-color);
   }
 
   .hamburger-icon {
@@ -194,8 +196,8 @@ export const HeaderLogomenuStyles = css`
       background-color: var(--_header-logomenu-submenu-background-color);
       position: absolute;
       top: 1rem;
-      right: 2.5rem;
-      width: auto;
+      right: -2rem;
+      max-width: 12rem;
       text-align: center;
       z-index: 1;
       height: auto;
