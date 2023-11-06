@@ -100,13 +100,22 @@ export class HeaderLogomenu extends LitElement {
         if (mutation.type === 'childList') {
           // console.log('Cambio detectado en el Light DOM:', mutation);
           this.lightDOM = this.querySelector('nav') || null;
+          this._removeEvents();
           this.content.innerText = '';
           this._processLightDOM();
           this._initHeaderContent();
+          this._manageEvents();
         }
       }
     });
     this.lightDOMObserver.observe(this, { childList: true });
+  }
+
+  _removeEvents() {
+    this.shadowRoot.querySelector('.navbar-container').removeEventListener('click', this._showMenu);
+    this.shadowRoot.querySelector('.hamburger-menu').removeEventListener('click', this._showMenu);
+    this.shadowRoot.querySelector('.hamburger-menu').removeEventListener('keypress', this._showMenu);
+    this.shadowRoot.querySelector('header').removeEventListener('keydown', this._showMenu);
   }
 
   _manageEvents() {
