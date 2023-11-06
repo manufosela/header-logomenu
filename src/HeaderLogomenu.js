@@ -98,7 +98,7 @@ export class HeaderLogomenu extends LitElement {
     this.lightDOMObserver = new MutationObserver((mutationsList) => {
       for (const mutation of mutationsList) {
         if (mutation.type === 'childList') {
-          console.log('Cambio detectado en el Light DOM:', mutation);
+          // console.log('Cambio detectado en el Light DOM:', mutation);
           this.lightDOM = this.querySelector('nav') || null;
           this.content.innerText = '';
           this._processLightDOM();
@@ -112,7 +112,7 @@ export class HeaderLogomenu extends LitElement {
   _manageEvents() {
     this.shadowRoot.querySelector('ul.menu').addEventListener('click', (e) => {
       const { target } = e;
-      console.log(target, target.parentElement);
+      // console.log(target, target.parentElement);
       if (target.tagName === 'BUTTON' || (target.tagName === 'IMG' && target.classList.contains('navbar__arrow'))) {
         this._showMenu(e, target);
       }
