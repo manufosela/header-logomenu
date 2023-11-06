@@ -9,7 +9,6 @@ export class HeaderLogomenu extends LitElement {
     logo: { type: String },
     logoUrl: { type: String, attribute: 'logo-url' },
     menuTitle: { type: String, attribute: 'menu-title' },
-    fillArrowColor: { type: String },
   };
 
   constructor() {
@@ -20,21 +19,9 @@ export class HeaderLogomenu extends LitElement {
     if (!this.querySelector('*')) {
       this.appendChild(document.createElement('div'));
     }
-    this.lightDOM = this.querySelectorAll('*');
+    this.lightDOM = this.querySelector('nav') || null;
     this.content = document.createElement('div');
 
-    this.lightDOM.forEach((item) => {
-      if (item.tagName === 'NAV') {
-        console.log('lightdom with nav');
-        const newNav = item.cloneNode(true);
-        this.content.appendChild(newNav);
-        this.content.classList.add('navbar-container');
-        this.content.setAttribute('role', 'navigation');
-        this.content.setAttribute('aria-label', 'menu de navegación');
-      }
-    });
-
-    this.fillArrowColor = '#000000';
     this.arrowDown = `<svg fill="@COLOR@" height="800px" width="800px" version="1.1" id="buttonArrow" 
       xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 330 330" xml:space="preserve">
       <path id="XMLID_225_" d="M325.607,79.393c-5.857-5.857-15.355-5.858-21.213,0.001l-139.39,139.393L25.607,79.393
@@ -53,7 +40,24 @@ export class HeaderLogomenu extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
+    this._processLightDOM();
+    this._detectLightDOMChanges();
+    this._initHeaderContent();
+  }
 
+  _processLightDOM() {
+    if (this.lightDOM) {
+      const newNav = this.lightDOM.cloneNode(true);
+      this.content.appendChild(newNav);
+      this.content.classList.add('navbar-container');
+      this.content.setAttribute('role', 'navigation');
+      this.content.setAttribute('aria-label', 'menu de navegación');
+    } else {
+      console.error('no <nav> element found in light DOM');
+    }
+  }
+
+  _initHeaderContent() {
     // Insertar antes del primer UL un div
     const div = html`
     <div class="hamburger-menu" tabindex="2">
@@ -71,6 +75,10 @@ export class HeaderLogomenu extends LitElement {
       firstUL.classList.add('menu');
     }
 
+    this._addArrowToButtons();
+  }
+
+  _addArrowToButtons() {
     this.content.querySelectorAll('button').forEach((button) => {
       // add image to the right of the button with a arrow and add aria-expanded="false"
       const arrow = document.createElement('img');
@@ -84,6 +92,21 @@ export class HeaderLogomenu extends LitElement {
       button.setAttribute('aria-controls', `${button.parentElement.id}-submenu`);
       button.parentElement.querySelector('ul').setAttribute('id', `${button.parentElement.id}-submenu`);
     });
+  }
+
+  _detectLightDOMChanges() {
+    this.lightDOMObserver = new MutationObserver((mutationsList) => {
+      for (const mutation of mutationsList) {
+        if (mutation.type === 'childList') {
+          console.log('Cambio detectado en el Light DOM:', mutation);
+          this.lightDOM = this.querySelector('nav') || null;
+          this.content.innerText = '';
+          this._processLightDOM();
+          this._initHeaderContent();
+        }
+      }
+    });
+    this.lightDOMObserver.observe(this, { childList: true });
   }
 
   _manageEvents() {
@@ -140,8 +163,7 @@ export class HeaderLogomenu extends LitElement {
     button.setAttribute('aria-expanded', false);
   }
 
-  _closeAllSubMenus(ev) {
-    // console.log(ev);
+  _closeAllSubMenus() {
     const ulsWithLiAndButton = this.shadowRoot.querySelectorAll('ul li button');
     ulsWithLiAndButton.forEach(button => {
       const parentUL = button.parentElement;
@@ -207,7 +229,6 @@ export class HeaderLogomenu extends LitElement {
     return html``;
   }
 
-
   firstUpdated() {
     this.style.visibility = 'visible';
 
@@ -216,10 +237,10 @@ export class HeaderLogomenu extends LitElement {
     const button = this.shadowRoot.querySelector('button');
     if (button) {
       const computedStyle = getComputedStyle(button);
-      this.fillArrowColor = HeaderLogomenu.rgbToHex(computedStyle.color);
+      const fillArrowColor = HeaderLogomenu.rgbToHex(computedStyle.color);
       const arrows = this.shadowRoot.querySelectorAll('ul > li > button > img');
       arrows.forEach((arrow) => {
-        const arrowDown = this.arrowDown.replace('@COLOR@', this.fillArrowColor);
+        const arrowDown = this.arrowDown.replace('@COLOR@', fillArrowColor);
         // eslint-disable-next-line no-param-reassign
         arrow.src = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(arrowDown)}`;
       });
