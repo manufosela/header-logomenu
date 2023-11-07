@@ -35,7 +35,12 @@ export class HeaderLogomenu extends LitElement {
         l-149.996,150c-5.858,5.858-5.858,15.355,0,21.213c5.857,5.857,15.355,5.858,21.213,0l139.39-139.393l139.397,139.393
         C307.322,253.536,311.161,255,315,255c3.839,0,7.678-1.464,10.607-4.394C331.464,244.748,331.464,235.251,325.606,229.393z"/>
       </svg>`;
-    this._showMenu = this._showMenu.bind(this);
+
+    /* Bind this in listeners methods */
+    this._navEvents = this._navEvents.bind(this);
+    this._hamburgerMenuKeypress = this._hamburgerMenuKeypress.bind(this);
+    this._menuKeyDown = this._menuKeyDown.bind(this);
+    this._toggleMenu = this._toggleMenu.bind(this);
   }
 
   connectedCallback() {
@@ -111,43 +116,48 @@ export class HeaderLogomenu extends LitElement {
     this.lightDOMObserver.observe(this, { childList: true });
   }
 
+  _navEvents(e) {
+    const { target } = e;
+    console.log(target);
+    // console.log(target, target.parentElement);
+    if (target.tagName === 'BUTTON' || (target.tagName === 'IMG' && target.classList.contains('navbar__arrow'))) {
+      this._showMenu(e, target);
+    }
+    if (target.tagName === 'A') {
+      this.shadowRoot.querySelector('.menu').classList.remove('show');
+      this._closeAllSubMenus(e);
+    }
+  }
+
+  _hamburgerMenuKeypress(e) {
+    if (e.keyCode === 13) {
+      menu.classList.toggle('show');
+      this.shadowRoot.querySelector('.menu LI').focus();
+    }
+  }
+
+  _menuKeyDown(e) {
+    if (e.key === 'Escape') {
+      menu.classList.remove('show');
+    }
+  }
+
+  _toggleMenu() {
+    menu.classList.toggle('show');
+  }
+
   _removeEvents() {
-    this.shadowRoot.querySelector('.navbar-container').removeEventListener('click', this._showMenu);
-    this.shadowRoot.querySelector('.hamburger-menu').removeEventListener('click', this._showMenu);
-    this.shadowRoot.querySelector('.hamburger-menu').removeEventListener('keypress', this._showMenu);
-    this.shadowRoot.querySelector('header').removeEventListener('keydown', this._showMenu);
+    this.shadowRoot.querySelector('.navbar-container').removeEventListener('click', this._navEvents);
+    this.shadowRoot.querySelector('.hamburger-menu').removeEventListener('click', this._toggleMenu);
+    this.shadowRoot.querySelector('.hamburger-menu').removeEventListener('keypress', this._hamburgerMenuKeypress);
+    this.shadowRoot.querySelector('header').removeEventListener('keydown', this._menuKeyDown);
   }
 
   _manageEvents() {
-    this.shadowRoot.querySelector('.navbar-container').addEventListener('click', (e) => {
-      const { target } = e;
-      // console.log(target, target.parentElement);
-      if (target.tagName === 'BUTTON' || (target.tagName === 'IMG' && target.classList.contains('navbar__arrow'))) {
-        this._showMenu(e, target);
-      }
-      if (target.tagName === 'A') {
-        this.shadowRoot.querySelector('.menu').classList.remove('show');
-        this._closeAllSubMenus(e);
-      }
-    });
-
-    const hamburgerMenu = this.shadowRoot.querySelector('.hamburger-menu');
-    const menu = this.shadowRoot.querySelector('.menu');
-
-    hamburgerMenu.addEventListener('click', () => {
-      menu.classList.toggle('show');
-    });
-    hamburgerMenu.addEventListener('keypress', (e) => {
-      if (e.keyCode === 13) {
-        menu.classList.toggle('show');
-        this.shadowRoot.querySelector('.menu LI').focus();
-      }
-    });
-    this.shadowRoot.querySelector('header').addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        menu.classList.remove('show');
-      }
-    });
+    this.shadowRoot.querySelector('.navbar-container').addEventListener('click', this._navEvents);
+    this.shadowRoot.querySelector('.hamburger-menu').addEventListener('click', this._toggleMenu);
+    this.shadowRoot.querySelector('.hamburger-menu').addEventListener('keypress', this._hamburgerMenuKeypress);
+    this.shadowRoot.querySelector('header').addEventListener('keydown', this._menuKeyDown);
   }
 
   _expandMenu(parentUL) {
