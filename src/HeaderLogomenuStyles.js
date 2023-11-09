@@ -272,6 +272,7 @@ export const HeaderLogomenuStyles = css`
     }
     .navbar-container {
       display: none;
+      height: 0;
     }
     .navbar {
       position: absolute;
