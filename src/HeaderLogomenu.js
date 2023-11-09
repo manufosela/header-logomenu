@@ -37,10 +37,10 @@ export class HeaderLogomenu extends LitElement {
       </svg>`;
 
     /* Bind this in listeners methods */
-    this._navEvents = this._navEvents.bind(this);
+    this._manageAllClickEvents = this._manageAllClickEvents.bind(this);
     this._hamburgerMenuKeypress = this._hamburgerMenuKeypress.bind(this);
     this._menuKeyDown = this._menuKeyDown.bind(this);
-    this._toggleMenu = this._toggleMenu.bind(this);
+    this._closeMenu = this._closeMenu.bind(this);
   }
 
   connectedCallback() {
@@ -48,6 +48,12 @@ export class HeaderLogomenu extends LitElement {
     this._processLightDOM();
     this._detectLightDOMChanges();
     this._initHeaderContent();
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.lightDOMObserver.disconnect();
+    this._removeEvents();
   }
 
   _processLightDOM() {
@@ -60,6 +66,11 @@ export class HeaderLogomenu extends LitElement {
     } else {
       console.error('no <nav> element found in light DOM');
     }
+    this.content.querySelector('nav').classList.add('navbar');
+    const aLinks = this.content.querySelectorAll('a');
+    aLinks.forEach((a) => {
+      a.classList.add('navbar__a');
+    });
   }
 
   _initHeaderContent() {
@@ -93,6 +104,7 @@ export class HeaderLogomenu extends LitElement {
       arrow.alt = '';
       arrow.classList.add('navbar__arrow');
       button.appendChild(arrow);
+      button.classList.add('navbar__button');
       button.setAttribute('aria-expanded', 'false');
       button.setAttribute('aria-controls', `${button.parentElement.id}-submenu`);
       button.parentElement.querySelector('ul').setAttribute('id', `${button.parentElement.id}-submenu`);
@@ -103,7 +115,6 @@ export class HeaderLogomenu extends LitElement {
     this.lightDOMObserver = new MutationObserver((mutationsList) => {
       for (const mutation of mutationsList) {
         if (mutation.type === 'childList') {
-          // console.log('Cambio detectado en el Light DOM:', mutation);
           this.lightDOM = this.querySelector('nav') || null;
           this._removeEvents();
           this.content.innerText = '';
@@ -118,13 +129,12 @@ export class HeaderLogomenu extends LitElement {
 
   _navEvents(e) {
     const { target } = e;
-    console.log(target);
-    // console.log(target, target.parentElement);
+    const menu = this.shadowRoot.querySelector('.menu');
     if (target.tagName === 'BUTTON' || (target.tagName === 'IMG' && target.classList.contains('navbar__arrow'))) {
       this._showMenu(e, target);
     }
     if (target.tagName === 'A') {
-      this.shadowRoot.querySelector('.menu').classList.remove('show');
+      menu.classList.remove('show');
       this._closeAllSubMenus(e);
     }
   }
@@ -133,6 +143,7 @@ export class HeaderLogomenu extends LitElement {
     const menu = this.shadowRoot.querySelector('.menu');
     const nav = this.shadowRoot.querySelector('.navbar-container');
     if (e.keyCode === 13) {
+      e.stopPropagation();
       menu.classList.toggle('show');
       nav.classList.toggle('show');
       this.shadowRoot.querySelector('.menu LI').focus();
@@ -152,19 +163,48 @@ export class HeaderLogomenu extends LitElement {
     const menu = this.shadowRoot.querySelector('.menu');
     const nav = this.shadowRoot.querySelector('.navbar-container');
     menu.classList.toggle('show');
-    nav.classList.toggle('show');
+    if (menu.classList.contains('show') && !nav.classList.contains('show') ||
+      !menu.classList.contains('show') && nav.classList.contains('show')) {
+      nav.classList.toggle('show');
+    }
+  }
+
+  _closeMenu() {
+    const menu = this.shadowRoot.querySelector('.menu');
+    const nav = this.shadowRoot.querySelector('.navbar-container');
+    menu.classList.remove('show');
+    nav.classList.remove('show');
+    this._closeAllSubMenus();
+  }
+
+  _manageAllClickEvents(e) {
+    e.stopPropagation();
+    const menuHamburgerClasses = ['hamburger-menu', 'hamburger-icon', 'bar'];
+    const submenuClasses = ['navbar__arrow', 'navbar__button', 'navbar__ul--expanded', 'navbar__ul'];
+    const resultMenu = menuHamburgerClasses.some((className) => e.target.classList.contains(className));
+    const resultSubmenu = submenuClasses.some((className) => e.target.classList.contains(className));
+    const resultLinkSubmenu = e.target.tagName === 'A' && e.target.classList.contains('navbar__a');
+    if (resultMenu) {
+      this._toggleMenu();
+    }
+    if (resultSubmenu) {
+      this._navEvents(e);
+    }
+    if (resultLinkSubmenu) {
+      this._closeMenu();
+    }
   }
 
   _removeEvents() {
-    this.shadowRoot.querySelector('.navbar-container').removeEventListener('click', this._navEvents);
-    this.shadowRoot.querySelector('.hamburger-menu').removeEventListener('click', this._toggleMenu);
+    document.addEventListener('click', this._closeMenu);
+    this.shadowRoot.removeEventListener('click', this._manageAllClickEvents);
     this.shadowRoot.querySelector('.hamburger-menu').removeEventListener('keypress', this._hamburgerMenuKeypress);
     this.shadowRoot.querySelector('header').removeEventListener('keydown', this._menuKeyDown);
   }
 
   _manageEvents() {
-    this.shadowRoot.querySelector('.navbar-container').addEventListener('click', this._navEvents);
-    this.shadowRoot.querySelector('.hamburger-menu').addEventListener('click', this._toggleMenu);
+    document.addEventListener('click', this._closeMenu);
+    this.shadowRoot.addEventListener('click', this._manageAllClickEvents);
     this.shadowRoot.querySelector('.hamburger-menu').addEventListener('keypress', this._hamburgerMenuKeypress);
     this.shadowRoot.querySelector('header').addEventListener('keydown', this._menuKeyDown);
   }

@@ -270,5 +270,14 @@ export const HeaderLogomenuStyles = css`
     .navbar-container {
       display: none;
     }
+    .navbar {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 200px;
+    }
+    .navbar__button {
+      margin: 0.5rem 0;
+    }
   }
 `;
