@@ -12,7 +12,7 @@ export const HeaderLogomenuStyles = css`
   :host {
     z-index: 100;
     --_header-logomenu-height: var(--header-logomenu-height, 4rem);
-    --_header-logomenu-color-primary: var(--header-logomenu-color-primary, #F70);
+    --_header-logomenu-color-primary: var(--header-logomenu-color-primary, turquoise);
     --_header-logomenu-color-secondary: var(--header-logomenu-color-secondary, rgba(255, 77, 0, 0.5));
     --_header-logomenu-color-dark: var(--header-logomenu-color-dark, #000);
     --_header-logomenu-text-color: var(--header-logomenu-text-color, #000);
@@ -24,6 +24,9 @@ export const HeaderLogomenuStyles = css`
     --_header-logomenu-logo-height: var(--header-logomenu-logo-height, 3rem);
     --_header-logomenu-logo-margin: var(--header-logomenu-logo-margin, 0);
     --_header-logomenu-logo-padding: var(--header-logomenu-logo-padding, 0);
+
+    --_header-logomenu-hamburger-bgcolor: var(--header-logomenu-hamburger-bgcolor, transparent);
+    --_header-logomenu-hamburger-color: var(--header-logomenu-hamburger-color, turquoise);
     
     --_header-logomenu-options-padding: var(--header-logomenu-options-padding, 0);
     --_header-logomenu-menu-background-color: var(--header-logomenu-menu-background-color, #eee);
@@ -32,7 +35,6 @@ export const HeaderLogomenuStyles = css`
     --_header-logomenu-submenu-color: var(--header-logomenu-submenu-color, #000);
     
     --_header-logomenu-background-color-selected: var(--header-logomenu-background-color-selected, #eee);
-    --_header-logomenu-color-bar: var(--header-logomenu-color-bar, #000);
     --_header-logomenu-element-hover-border: var(--header-logomenu-element-hover-border, 2px solid var(--_header-logomenu-color-dark));
     --_header-logomenu-element-hover-background-color: var(--header-logomenu-element-hover-background-color, var(--_header-logomenu-background-color-selected));
     --_header-logomenu-element-hover-border-radius: var(--header-logomenu-element-hover-border-radius, 0.5rem);
@@ -188,7 +190,7 @@ export const HeaderLogomenuStyles = css`
     display: none;
     cursor: pointer;
     padding: 1rem 1rem 0 1rem;
-    background-color: var(--_header-logomenu-background-color);
+    background-color: var(--_header-logomenu-hamburger-bgcolor);
   }
 
   .hamburger-icon {
@@ -202,7 +204,7 @@ export const HeaderLogomenuStyles = css`
   .bar {
     width: 100%;
     height: 3px;
-    background-color: var(--_header-logomenu-color-bar);
+    background-color: var(--_header-logomenu-hamburger-color);
   }
 
   @media (max-width: 768px) {
@@ -266,6 +268,7 @@ export const HeaderLogomenuStyles = css`
     }
     .hamburger-menu {
       grid-area: 1 / 5 / 2 / 6;
+      height: var(--firebase-loginbutton_btn-photo-size);
     }
     .navbar-container {
       display: none;
