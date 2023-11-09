@@ -130,20 +130,29 @@ export class HeaderLogomenu extends LitElement {
   }
 
   _hamburgerMenuKeypress(e) {
+    const menu = this.shadowRoot.querySelector('.menu');
+    const nav = this.shadowRoot.querySelector('.navbar-container');
     if (e.keyCode === 13) {
       menu.classList.toggle('show');
+      nav.classList.toggle('show');
       this.shadowRoot.querySelector('.menu LI').focus();
     }
   }
 
   _menuKeyDown(e) {
+    const menu = this.shadowRoot.querySelector('.menu');
+    const nav = this.shadowRoot.querySelector('.navbar-container');
     if (e.key === 'Escape') {
       menu.classList.remove('show');
+      nav.classList.remove('show');
     }
   }
 
   _toggleMenu() {
+    const menu = this.shadowRoot.querySelector('.menu');
+    const nav = this.shadowRoot.querySelector('.navbar-container');
     menu.classList.toggle('show');
+    nav.classList.toggle('show');
   }
 
   _removeEvents() {

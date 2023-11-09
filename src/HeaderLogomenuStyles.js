@@ -218,7 +218,7 @@ export const HeaderLogomenuStyles = css`
       background-color: var(--_header-logomenu-submenu-background-color);
       position: absolute;
       top: 1rem;
-      right: -2rem;
+      right: 0.5rem;
       max-width: 12rem;
       text-align: center;
       z-index: 1;
@@ -227,8 +227,8 @@ export const HeaderLogomenuStyles = css`
       padding: 1rem;
     }
   
-    .menu.show {
-      display: flex;
+    .show {
+      display: flex!important;
     }
   
     .menu li {
