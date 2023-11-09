@@ -224,6 +224,8 @@ export class HeaderLogomenu extends LitElement {
         a.href = this.logoUrl;
         a.tabIndex = 0;
       }
+      const div = document.createElement('div');
+      div.classList.add('headerLogoContainer');
       const img = document.createElement('img');
       img.src = this.logo;
       img.alt = 'header logo';
@@ -232,7 +234,8 @@ export class HeaderLogomenu extends LitElement {
         a.appendChild(img);
         return html`${a}`;
       }
-      return html`${img}`;
+      div.appendChild(img);
+      return html`${div}`;
     }
     return html``;
   }

@@ -15,7 +15,8 @@
     }
     
     :root {
-      --header-logomenu-height: 6rem;
+      --header-logomenu-height: 5rem;
+      --header-logomenu-logo-height: 4rem;
       --header-logomenu-color-primary: #fff;
       --header-logomenu-color-secondary: rgba(255,255,0,0.8);
       --header-logomenu-color-dark: #000;
@@ -32,6 +33,12 @@
       --header-logomenu-element-hover-border: 2px solid var(--header-logomenu-color-dark);
       --header-logomenu-element-hover-background-color: transparent;
     }
+
+    @media (max-width: 768px) {
+      :root {
+        --header-logomenu-height: 3.5rem;
+        
+      }
   </style>
 </head>
 <body>

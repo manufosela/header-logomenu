@@ -16,19 +16,26 @@ export const HeaderLogomenuStyles = css`
     --_header-logomenu-color-secondary: var(--header-logomenu-color-secondary, rgba(255, 77, 0, 0.5));
     --_header-logomenu-color-dark: var(--header-logomenu-color-dark, #000);
     --_header-logomenu-text-color: var(--header-logomenu-text-color, #000);
-    --_header-logomenu-logo-height: var(--header-logomenu-logo-height, 3rem);
     --_header-logomenu-background-color: var(--header-logomenu-background-color, #fff);
     --_header-logomenu-border: var(--header-logomenu-border, 0);
+    --_header-logomenu-justify-content: var(--header-logomenu-justify-content, space-evenly);
+    
+    --_header-logomenu-logocontainer-width: var(--header-logomenu-logocontainer-width, 8rem);
+    --_header-logomenu-logo-height: var(--header-logomenu-logo-height, 3rem);
+    --_header-logomenu-logo-margin: var(--header-logomenu-logo-margin, 0);
+    --_header-logomenu-logo-padding: var(--header-logomenu-logo-padding, 0);
+    
+    --_header-logomenu-options-padding: var(--header-logomenu-options-padding, 0);
     --_header-logomenu-menu-background-color: var(--header-logomenu-menu-background-color, #eee);
-    --_header-logomenu-submenu-background-color: var(--header-logomenu-submenu-background-color, #ddd);
     --_header-logomenu-menu-color: var(--header-logomenu-menu-color, #000);
+    --_header-logomenu-submenu-background-color: var(--header-logomenu-submenu-background-color, #ddd);
     --_header-logomenu-submenu-color: var(--header-logomenu-submenu-color, #000);
+    
     --_header-logomenu-background-color-selected: var(--header-logomenu-background-color-selected, #eee);
     --_header-logomenu-color-bar: var(--header-logomenu-color-bar, #000);
     --_header-logomenu-element-hover-border: var(--header-logomenu-element-hover-border, 2px solid var(--_header-logomenu-color-dark));
     --_header-logomenu-element-hover-background-color: var(--header-logomenu-element-hover-background-color, var(--_header-logomenu-background-color-selected));
     --_header-logomenu-element-hover-border-radius: var(--header-logomenu-element-hover-border-radius, 0.5rem);
-    --_header-logomenu-justify-content: var(--header-logomenu-justify-content, space-evenly);
   
     display: block;
     margin: 0;
@@ -43,7 +50,7 @@ export const HeaderLogomenuStyles = css`
     display: flex;
     justify-content: var(--_header-logomenu-justify-content);
     max-width: 100vw;
-    height: var(--_header-logomenu-height);
+    max-height: var(--_header-logomenu-height);
     background-color: var(--_header-logomenu-background-color);
     border: var(--_header-logomenu-border);
   }
@@ -114,10 +121,23 @@ export const HeaderLogomenuStyles = css`
     color: var(--_header-logomenu-submenu-color);
     padding: 0.1rem 0;
   }
+  
+  .headerLogoContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: var(--_header-logomenu-logocontainer-width);
+    max-height: var(--_header-logomenu-height);
+    margin: 0;
+    padding: 0;
+  }
 
   .headerLogo {
+    max-width: var(--_header-logomenu-logocontainer-width);
+    max-height: var(--_header-logomenu-height);
     height: var(--_header-logomenu-logo-height);
-    padding-left: 1rem;
+    padding: var(--_header-logomenu-logo-padding);
+    margin: var(--_header-logomenu-logo-margin);
   }
   
   .menuTitle {
@@ -125,9 +145,10 @@ export const HeaderLogomenuStyles = css`
     font-size: 1.5rem;
     margin:0;
     padding: 0 1rem;
-    height: 100%;
     display: flex;
+    justify-content: center;
     align-items: center;
+    height: var(--_header-logomenu-height);
   }
 
   .menuTitle a {
@@ -139,7 +160,8 @@ export const HeaderLogomenuStyles = css`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    margin: 0;
+    padding: var(--_header-logomenu-options-padding);
     background-color: var(--_header-logomenu-background-color);
     color: white;
   }
@@ -218,13 +240,35 @@ export const HeaderLogomenuStyles = css`
     }
 
     header {
-      justify-content: space-between;
-      display:flex;
-      width: 103vw;
+      // justify-content: space-between;
+      // display:flex;
+      // width: 103vw;
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      grid-template-rows: repeat(5, 1fr);
+      grid-column-gap: 0px;
+      grid-row-gap: 0px;      
     }
 
     ul > li > button, ul > li > ul {
       margin:0;
+    }
+
+    .headerLogo {
+      grid-area: 1 / 1 / 2 / 2;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      margin: 0 auto;
+    }
+    .menuTitle {
+      grid-area: 1 / 2 / 2 / 5; 
+    }
+    .hamburger-menu {
+      grid-area: 1 / 5 / 2 / 6;
+    }
+    .navbar-container {
+      display: none;
     }
   }
 `;
