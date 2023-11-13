@@ -18,6 +18,7 @@ npm i header-logomenu
 <header-logomenu logo="/image/logo.png" logo-url="http://myurl.com">
   <nav>
     <ul>
+      <li id="outer"></li>
       <li id="menu1">
         <button>MENU 1</button>
         <ul>
@@ -32,6 +33,7 @@ npm i header-logomenu
       <li id="linkD"><a href="https://url-to-linkD">Option 5 menu</a></li>
     </ul>
   </nav>
+  <a data-not-clone="outer" href="#outer" id="linkOUTER">OUTER</a>
 </header-logomenu>
 ```
 
@@ -56,6 +58,15 @@ npm i header-logomenu
     --header-logomenu-element-hover-border-radius
     --header-logomenu-justify-content
 ```
+
+## Cloned and not cloned elements
+
+The *nav* tag is cloned into the shadow Root, adding encapsulated CSS classes and events.
+
+All elements outside the *nav* tag are not cloned.
+
+All elements with the attribute *data-not-clone* are not cloned, but it moves to shadow Root if a nav element has the id of the *data-not-cloned* attribute.
+For example de *a* tag with *data-not-clone="outer"* is moved to shadow Root because the *nav* tag has an element with id *outer*.
 
 ## Linting and formatting
 

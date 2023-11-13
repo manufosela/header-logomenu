@@ -20,6 +20,7 @@ export class HeaderLogomenu extends LitElement {
       this.appendChild(document.createElement('div'));
     }
     this.lightDOM = this.querySelector('nav') || null;
+    this.notClonedLightDOM = [...this.querySelectorAll('[data-not-clone]')] || [];
     this.content = document.createElement('div');
 
     this.arrowDown = `<svg fill="@COLOR@" height="800px" width="800px" version="1.1" id="buttonArrow" 
@@ -46,6 +47,7 @@ export class HeaderLogomenu extends LitElement {
   connectedCallback() {
     super.connectedCallback();
     this._processLightDOM();
+    this._processNotClonedLightDOM();
     this._detectLightDOMChanges();
     this._initHeaderContent();
   }
@@ -70,6 +72,15 @@ export class HeaderLogomenu extends LitElement {
     const aLinks = this.content.querySelectorAll('a');
     aLinks.forEach((a) => {
       a.classList.add('navbar__a');
+    });
+  }
+
+  _processNotClonedLightDOM() {
+    this.notClonedLightDOM.forEach((item) => {
+      const id = item.dataset.notClone;
+      if (this.content.querySelector(`#${id}`)) {
+        this.content.querySelector(`#${id}`).appendChild(item);
+      }
     });
   }
 
@@ -119,6 +130,7 @@ export class HeaderLogomenu extends LitElement {
           this._removeEvents();
           this.content.innerText = '';
           this._processLightDOM();
+          this._processNotClonedLightDOM();
           this._initHeaderContent();
           this._manageEvents();
         }
